@@ -1,0 +1,366 @@
+/* استدعاء خط Cairo */
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap');
+
+/* استخراج الألوان من اللوجو الجديد */
+:root {
+    --bg-dark: #070b19; /* لون الخلفية الكحلي الغامق من اللوجو */
+    --card-bg: rgba(16, 24, 43, 0.8); /* خلفية الكروت شفافة شوية (Glassmorphism) */
+    --neon-blue: #00d2ff; /* الأزرق المضيء */
+    --neon-green: #00ff87; /* الأخضر النيون بتاع السهم */
+    --neon-purple: #9d4edd; /* البنفسجي */
+    --text-main: #ffffff;
+    --text-muted: #a0aabf;
+    --border-radius: 16px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Cairo', sans-serif;
+}
+
+body {
+    background-color: var(--bg-dark);
+    /* خلفية متدرجة خفيفة بتدي عمق */
+    background-image: radial-gradient(circle at top center, #111a30, var(--bg-dark)); 
+    color: var(--text-main);
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    min-height: 100vh;
+}
+
+.container {
+    width: 100%;
+    max-width: 500px;
+}
+
+/* تصميم الهيدر متوافق مع اللوجو */
+header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+header h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    /* تدرج لوني لنص العنوان زي اللوجو */
+    background: linear-gradient(90deg, var(--neon-blue), var(--neon-green));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 20px rgba(0, 210, 255, 0.3);
+    margin-bottom: 5px;
+}
+
+header p {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+}
+
+/* تصميم الكروت (Glass Effect) */
+.calculator-section, .result-section {
+    background: var(--card-bg);
+    border: 1px solid rgba(0, 210, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 20px;
+    border-radius: var(--border-radius);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    margin-bottom: 20px;
+}
+
+/* تصميم صف المادة */
+.subject-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.subject-row input, .subject-row select {
+    flex: 1;
+    padding: 12px;
+    background-color: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    color: var(--text-main);
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+/* تأثير الإضاءة لما الطالب يكتب في الخانة */
+.subject-row input:focus, .subject-row select:focus {
+    border-color: var(--neon-blue);
+    box-shadow: 0 0 10px rgba(0, 210, 255, 0.2);
+}
+
+.subject-row select option {
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+}
+
+/* تصميم الزراير بستايل الجيمنج/النيون */
+button {
+    width: 100%;
+    padding: 15px;
+    font-size: 1.2rem;
+    font-weight: 800;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+}
+
+button:active {
+    transform: scale(0.96);
+}
+
+/* زرار إضافة مادة (بنفسجي/أزرق) */
+.btn-primary {
+    background: linear-gradient(45deg, var(--neon-purple), var(--neon-blue));
+    color: white;
+    box-shadow: 0 4px 15px rgba(157, 78, 221, 0.4);
+    margin-top: 10px;
+}
+
+.btn-primary:hover {
+    box-shadow: 0 6px 20px rgba(157, 78, 221, 0.6);
+}
+
+/* زرار حساب النتيجة (أخضر/أزرق متوافق مع سهم اللوجو) */
+.btn-success {
+    background: linear-gradient(45deg, var(--neon-blue), var(--neon-green));
+    color: #000; /* خط أسود عشان يبرز على الألوان الفاتحة */
+    box-shadow: 0 4px 15px rgba(0, 255, 135, 0.4);
+    margin-top: 20px;
+}
+
+.btn-success:hover {
+    box-shadow: 0 6px 20px rgba(0, 255, 135, 0.6);
+}
+
+/* زرار الحذف (أحمر نيون) */
+.subject-row button {
+    flex: 0.2;
+    background: transparent;
+    border: 1px solid rgba(255, 50, 50, 0.3);
+    color: #ff4757;
+    margin: 0;
+    padding: 10px;
+}
+
+.subject-row button:hover {
+    background: rgba(255, 50, 50, 0.1);
+    box-shadow: 0 0 10px rgba(255, 50, 50, 0.2);
+}
+
+/* منطقة النتيجة */
+.result-section {
+    text-align: center;
+    margin-top: 20px;
+}
+
+#final-gpa {
+    font-size: 4rem;
+    font-weight: 800;
+    background: linear-gradient(90deg, var(--neon-green), var(--neon-blue));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 30px rgba(0, 255, 135, 0.4);
+    display: block;
+    margin: 15px 0;
+}
+
+/* ستايل التراكمي القديم */
+.cumulative-section {
+    background: rgba(157, 78, 221, 0.05);
+    border: 1px dashed var(--neon-purple);
+    padding: 15px;
+    border-radius: var(--border-radius);
+    margin-bottom: 20px;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.2);
+}
+
+.cumulative-section h3 {
+    font-size: 1rem;
+    color: var(--neon-purple);
+    margin-bottom: 10px;
+}
+
+/* زرار الشير (ألوان الواتساب) */
+.btn-share {
+    background: linear-gradient(45deg, #25D366, #128C7E);
+    color: white;
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+    margin-top: 15px;
+    display: none; /* مخفي لحد ما يحسب النتيجة */
+}
+
+.btn-share:hover {
+    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
+}
+
+/* تظبيط مقاس اللوجو وتأثير الإضاءة */
+.logo-img {
+    width: 120px; /* مقاس مناسب جداً للموبايل */
+    margin-bottom: 15px;
+    filter: drop-shadow(0 0 15px rgba(0, 210, 255, 0.5)); /* إضاءة زرقا خفيفة ورا اللوجو */
+    transition: transform 0.3s ease;
+}
+
+.logo-img:hover {
+    transform: scale(1.05); /* اللوجو يكبر سنة بسيطة لو حد وقف عليه بالماوس */
+}
+
+/* تصميم شاشة الترحيب */
+#splash-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--bg-dark);
+    background-image: radial-gradient(circle at center, #111a30, var(--bg-dark)); 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; /* عشان تبقى فوق كل حاجة */
+    transition: opacity 0.5s ease, visibility 0.5s;
+}
+
+.splash-logo {
+    width: 150px;
+    margin-bottom: 20px;
+    animation: pulse 2s infinite; /* أنيماشن نبض للوجو */
+}
+
+.splash-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    background: linear-gradient(90deg, var(--neon-blue), var(--neon-green));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 10px;
+}
+
+.splash-subtitle {
+    color: var(--text-muted);
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+}
+
+/* شريط التحميل (Loader) */
+.loader {
+    width: 50px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+}
+
+.loader::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 50%;
+    background: linear-gradient(90deg, var(--neon-blue), var(--neon-green));
+    animation: loading 1.5s infinite ease-in-out;
+}
+
+/* حركات الأنيماشن */
+@keyframes pulse {
+    0% { transform: scale(1); filter: drop-shadow(0 0 15px rgba(0, 210, 255, 0.5)); }
+    50% { transform: scale(1.1); filter: drop-shadow(0 0 30px rgba(0, 255, 135, 0.8)); }
+    100% { transform: scale(1); filter: drop-shadow(0 0 15px rgba(0, 210, 255, 0.5)); }
+}
+
+@keyframes loading {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(200%); }
+}
+
+/* كلاس هنستخدمه عشان نخفي الشاشة */
+.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* إخفاء الأقسام وإظهار النشط بس بأنيمشن */
+.tab-content {
+    display: none;
+    animation: fadeIn 0.4s ease-in-out;
+}
+
+.tab-content.active-tab {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* شريط التنقل السفلي (زي الأبلكيشنز) */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(7, 11, 25, 0.95); /* كحلي غامق شفاف */
+    backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(0, 210, 255, 0.1);
+    display: flex;
+    justify-content: space-around;
+    padding: 12px 0 15px 0;
+    box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    flex: 1;
+}
+
+.nav-icon {
+    font-size: 1.5rem;
+    margin-bottom: 4px;
+    transition: transform 0.3s ease;
+}
+
+.nav-text {
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+/* لما تدوس على أيقونة في الشريط */
+.nav-item.active {
+    color: var(--neon-blue);
+    text-shadow: 0 0 10px rgba(0, 210, 255, 0.5);
+}
+
+.nav-item.active .nav-icon {
+    transform: translateY(-5px) scale(1.1); /* الأيقونة تنط لفوق سنة */
+}
+
+/* زرار مسح البيانات (أحمر) */
+.btn-danger {
+    background: rgba(255, 71, 87, 0.1);
+    border: 1px solid #ff4757;
+    color: #ff4757;
+    box-shadow: 0 4px 15px rgba(255, 71, 87, 0.2);
+}
+
+.btn-danger:hover {
+    background: rgba(255, 71, 87, 0.2);
+    box-shadow: 0 6px 20px rgba(255, 71, 87, 0.4);
+}

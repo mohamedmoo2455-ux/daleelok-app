@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دليلك | مرشدك الأكاديمي الذكي</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- شاشة الترحيب -->
+    <div id="splash-screen">
+        <img src="image.png" alt="لوجو دليلك" class="splash-logo">
+        <h2 class="splash-title">دليلك</h2>
+        <p class="splash-subtitle">مرشدك الأكاديمي الذكي</p>
+        <div class="loader"></div>
+    </div>
+
+    <div class="container">
+        <header>
+            <img src="image.png" alt="لوجو دليلك" class="logo-img">
+            <h1>دليلك</h1>
+            <!-- كبسولة التحفيز اليومية -->
+            <p id="daily-quote" style="color: var(--neon-blue); font-size: 0.95rem; font-weight: bold; margin-top: 5px;">"عافر، التعب بيروح والنتيجة بتفضل" ✨</p>
+        </header>
+
+        <main style="padding-bottom: 90px;">
+            
+            <!-- القسم الأول: الحاسبة 🧮 -->
+            <div id="tab-calculator" class="tab-content active-tab">
+                <!-- شريط رحلة التخرج -->
+                <div class="progress-container" style="margin-bottom: 20px; text-align: center;">
+                    <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 5px;">رحلة التخرج 🎓 <span id="progress-text">0%</span></p>
+                    <div style="background: rgba(255,255,255,0.1); border-radius: 10px; height: 10px; width: 100%; overflow: hidden;">
+                        <div id="progress-bar" style="background: linear-gradient(90deg, var(--neon-blue), var(--neon-green)); height: 100%; width: 0%; transition: width 0.5s ease;"></div>
+                    </div>
+                </div>
+
+                <section class="cumulative-section">
+                    <h3>عندك GPA قديم؟ (اختياري)</h3>
+                    <div class="subject-row">
+                        <input type="number" id="old-gpa" placeholder="الـ GPA القديم" step="0.01" min="0" max="4">
+                        <input type="number" id="old-hours" placeholder="إجمالي الساعات القديمة" min="0">
+                    </div>
+                </section>
+
+                <section class="calculator-section">
+                    <div id="subjects-container"></div>
+                    <button id="add-subject-btn" class="btn-primary">+ ضيف مادة جديدة</button>
+                </section>
+
+                <section class="result-section">
+                    <h2>الـ GPA بتاعك: <span id="final-gpa">0.00</span></h2>
+                    <h3 id="percentage-area" style="display: none; color: var(--neon-purple); margin-bottom: 10px;">النسبة المئوية التقريبية: <span id="final-percentage">0</span>%</h3>
+                    <div id="academic-warning" style="display: none; background: rgba(255, 71, 87, 0.1); border: 1px dashed #ff4757; color: #ff4757; padding: 10px; border-radius: 10px; margin-bottom: 15px; font-size: 0.9rem;">
+                        ⚠️ <b>تنبيه أكاديمي:</b> معدلك تحت 2.0، ركز الترم الجاي عشان تتجنب الإنذار.
+                    </div>
+                    <p id="motivation-msg">ضيف موادك عشان نشوف النتيجة 💪</p>
+                    <button id="calculate-btn" class="btn-success">احسب النتيجة</button>
+                    <button id="share-btn" class="btn-share" style="display: none;">📲 شير نتيجتك لصحابك</button>
+                </section>
+            </div>
+
+            <!-- القسم الثاني: الهدف والتحسين 🎯 -->
+            <div id="tab-target" class="tab-content">
+                <section class="calculator-section" style="text-align: center;">
+                    <h2 style="color: var(--neon-blue); margin-bottom: 15px;">حاسبة الهدف 🎯</h2>
+                    <p style="color: var(--text-muted); margin-bottom: 20px;">نفسك توصل لـ GPA كام التخرج؟</p>
+                    
+                    <div class="subject-row"><input type="number" id="target-current-gpa" placeholder="الـ GPA التراكمي بتاعك دلوقتي" step="0.01"></div>
+                    <div class="subject-row"><input type="number" id="target-current-hours" placeholder="إجمالي الساعات اللي خلصتها"></div>
+                    <div class="subject-row"><input type="number" id="target-next-hours" placeholder="هتسجل كام ساعة الترم ده؟"></div>
+                    <div class="subject-row" style="border: 1px solid var(--neon-green); box-shadow: 0 0 10px rgba(0, 255, 135, 0.1);">
+                        <input type="number" id="target-dream-gpa" placeholder="نفسك توصل لـ GPA كام؟" step="0.01">
+                    </div>
+                    
+                    <button id="calculate-target-btn" class="btn-success">احسب المطلوب</button>
+                    
+                    <div id="target-result-area" style="margin-top: 25px; display: none; padding-top: 20px; border-top: 1px dashed rgba(255,255,255,0.2);">
+                        <h3 style="color: var(--text-main); font-size: 1.1rem;">عشان توصل لهدفك محتاج تجيب الترم ده:</h3>
+                        <span id="required-term-gpa" style="font-size: 4rem; font-weight: 800; color: var(--neon-green); display: block;">0.00</span>
+                        <p id="target-msg" style="color: var(--text-muted); font-size: 1.1rem;"></p>
+                    </div>
+                </section>
+            </div>
+
+            <!-- القسم الثالث: طوق النجاة (الفاينال) 🛟 -->
+            <div id="tab-rescue" class="tab-content">
+                <section class="calculator-section" style="text-align: center;">
+                    <h2 style="color: #ff9f43; margin-bottom: 15px;">طوق النجاة 🛟</h2>
+                    <p style="color: var(--text-muted); margin-bottom: 20px;">خايف تشيل المادة؟ احسب محتاج كام في الفاينال عشان تنجح.</p>
+                    
+                    <div class="subject-row"><input type="number" id="total-course-mark" placeholder="المادة من كام؟ (مثال: 100)"></div>
+                    <div class="subject-row"><input type="number" id="midterm-mark" placeholder="جمعت كام في أعمال السنة والميدتيرم؟"></div>
+                    <div class="subject-row"><input type="number" id="passing-mark" placeholder="درجة النجاح من كام؟ (غالبا 50 أو 60)"></div>
+                    
+                    <button id="calculate-rescue-btn" class="btn-success" style="background: linear-gradient(45deg, #ff9f43, #ff4757); color: #fff;">احسب طوق النجاة</button>
+                    
+                    <div id="rescue-result-area" style="margin-top: 25px; display: none;">
+                        <span id="required-final-mark" style="font-size: 3rem; font-weight: 800; color: #ff9f43; display: block;">0</span>
+                        <p id="rescue-msg" style="color: var(--text-main); font-size: 1.1rem; margin-top: 10px;"></p>
+                    </div>
+                </section>
+            </div>
+
+            <!-- القسم الرابع: المذاكرة (Pomodoro) ⏳ -->
+            <div id="tab-timer" class="tab-content">
+                <section class="calculator-section" style="text-align: center;">
+                    <h2 style="color: var(--neon-purple); margin-bottom: 15px;">وقت المذاكرة ⏳</h2>
+                    <p style="color: var(--text-muted); margin-bottom: 20px;">ذاكر بذكاء 25 دقيقة وافصل 5 دقايق.</p>
+                    
+                    <div class="timer-display" style="font-size: 4.5rem; font-weight: bold; color: var(--neon-purple); text-shadow: 0 0 20px rgba(157, 78, 221, 0.4); margin: 20px 0;">
+                        <span id="minutes">25</span>:<span id="seconds">00</span>
+                    </div>
+                    
+                    <div style="display: flex; gap: 10px;">
+                        <button id="start-timer-btn" class="btn-success" style="margin-top: 0;">ابدأ المذاكرة ▶️</button>
+                        <button id="reset-timer-btn" class="btn-danger" style="margin-top: 0; background: transparent; border: 1px solid #ff4757;">إعادة 🔄</button>
+                    </div>
+                </section>
+            </div>
+
+            <!-- القسم الخامس: الإعدادات ⚙️ -->
+            <div id="tab-settings" class="tab-content">
+                <section class="calculator-section" style="text-align: center;">
+                    <h2 style="color: var(--text-main); margin-bottom: 20px;">الإعدادات ⚙️</h2>
+                    <p style="color: var(--text-muted); margin-bottom: 20px;">لو عايز تمسح كل موادك ودرجاتك وتبدأ من الصفر.</p>
+                    <button id="clear-data-btn" class="btn-danger">🗑️ مسح كل بياناتي</button>
+                </section>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- شريط التنقل السفلي -->
+    <nav class="bottom-nav">
+        <div class="nav-item active" data-target="tab-calculator">
+            <span class="nav-icon">🧮</span>
+            <span class="nav-text">الحاسبة</span>
+        </div>
+        <div class="nav-item" data-target="tab-target">
+            <span class="nav-icon">🎯</span>
+            <span class="nav-text">الهدف</span>
+        </div>
+        <div class="nav-item" data-target="tab-rescue">
+            <span class="nav-icon">🛟</span>
+            <span class="nav-text">النجاة</span>
+        </div>
+        <div class="nav-item" data-target="tab-timer">
+            <span class="nav-icon">⏳</span>
+            <span class="nav-text">مذاكرة</span>
+        </div>
+        <div class="nav-item" data-target="tab-settings">
+            <span class="nav-icon">⚙️</span>
+            <span class="nav-text">إعدادات</span>
+        </div>
+    </nav>
+
+    <!-- مكتبة الاحتفال -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
