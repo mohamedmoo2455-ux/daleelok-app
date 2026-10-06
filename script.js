@@ -157,7 +157,7 @@ function calculateGPA() {
     }
 
     shareBtn.onclick = () => {
-        const shareText = `حسبت الـ GPA بتاعي على (دليلك) وطلع ${finalGpa} وخلصت ${progressPercent}% من رحلتي! 🎓🔥\nاحسب نتيجتك من هنا:\n[هنضيف اللينك بعدين]`;
+        const shareText = `حسبت الـ GPA بتاعي على (دليلك) وطلع ${finalGpa} وخلصت ${progressPercent}% من رحلتي! 🎓🔥\nاحسب نتيجتك من هنا:\nhttps://daleelok-app.vercel.app/`;
         if (navigator.share) navigator.share({ title: 'نتيجتي', text: shareText });
         else window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(shareText)}`);
     };
